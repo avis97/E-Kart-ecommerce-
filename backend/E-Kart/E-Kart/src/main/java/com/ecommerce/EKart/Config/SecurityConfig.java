@@ -21,6 +21,7 @@ import java.util.Collections;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 
@@ -29,7 +30,8 @@ public class SecurityConfig{
                .and()
                .authorizeHttpRequests(Auth->Auth.requestMatchers("/api/**")
                        .authenticated().anyRequest().permitAll())
-                       .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf().disable()
+                       .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
+                       .csrf().disable()
                        .cors().configurationSource(new CorsConfigurationSource(){
                        @Override
                        public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
