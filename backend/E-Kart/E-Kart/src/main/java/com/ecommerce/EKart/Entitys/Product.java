@@ -36,6 +36,7 @@ public class Product{
     @Embedded
     @ElementCollection
     private Set<Size> sizes=new HashSet<>();
+
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Rating> ratingList=new ArrayList<>();
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)

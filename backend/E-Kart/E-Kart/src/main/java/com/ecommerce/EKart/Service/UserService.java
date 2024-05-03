@@ -6,5 +6,6 @@ import com.ecommerce.EKart.Exception.UserNotFoundException;
 public interface UserService{
     User findUserById(int userId) throws UserNotFoundException;
     User findUserByJwt(String jwt) throws UserNotFoundException;
-    void createNewUser(User user);
+    User createNewUser(User user);
+    void updateToken(String jwt,String email);
 }

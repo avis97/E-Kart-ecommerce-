@@ -17,7 +17,6 @@ import java.util.ArrayList;
 @Entity
 @Data
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,26 +25,28 @@ public class User implements UserDetails {
     private String password;
     private String email;
     private String number;
+    private String jwt;
     private LocalDateTime creationDate;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Address> addressList=new ArrayList<>();
     @Embedded
     @ElementCollection
     @CollectionTable(name="payment_information",joinColumns = @JoinColumn(name = "user_id"))
     private List<PaymentInformation> paymentInformationList=new ArrayList<>();
-
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Rating> ratingList=new ArrayList<>();
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Review> reviewList=new ArrayList<>();
-
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Order> orderList=new ArrayList<>();
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-
     @Override
     public String getUsername() {
         return email;

@@ -1,12 +1,13 @@
 package com.ecommerce.EKart.Controller;
 
-import com.ecommerce.EKart.Config.Security.JwtService;
+import com.ecommerce.EKart.Config.Security.JwtServiceImpl;
 import com.ecommerce.EKart.Config.Security.UserDetailsServiceImpl;
 import com.ecommerce.EKart.Dtos.Request.AuthRequest;
 import com.ecommerce.EKart.Dtos.Response.AuthResponse;
 import com.ecommerce.EKart.Entitys.User;
 import com.ecommerce.EKart.Exception.UserNotFoundException;
 import com.ecommerce.EKart.Repository.UserRepository;
+import com.ecommerce.EKart.Service.CartService;
 import com.ecommerce.EKart.Service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,14 +31,17 @@ public class AuthController{
     @Autowired
     UserRepository userRepository;
     @Autowired
-    JwtService jwtService;
+    JwtServiceImpl jwtService;
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
     UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    CartService cartService;
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createNewUser(@RequestBody User user) throws UserNotFoundException {
+    public ResponseEntity<AuthResponse> createNewUser(@RequestBody User user) throws UserNotFoundException{
+
         String email=user.getEmail();
         String password=user.getPassword();
         User user1=userRepository.findByEmail(email);
@@ -47,12 +51,13 @@ public class AuthController{
             response.setToken("Opps!! cant Possible");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        userService.createNewUser(user);
+        User saveUser=userService.createNewUser(user);
+        cartService.createCart(saveUser);
         Authentication authentication=new UsernamePasswordAuthenticationToken(email,password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token=jwtService.GenerateToken(email);
-
+        userService.updateToken(token,email);
         response.setToken(token);
         response.setMsg("Signup success!");
 
@@ -75,7 +80,7 @@ public class AuthController{
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token=jwtService.GenerateToken(username);
-
+        userService.updateToken(token,username);
         response.setToken(token);
         response.setMsg("Login Success");
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);

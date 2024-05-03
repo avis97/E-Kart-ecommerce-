@@ -3,8 +3,12 @@ import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import { deepPurple } from '@mui/material/colors'
+import AuthModel from '../../../auth/AuthModel'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { getUser } from '../../../Store/Auth/Action'
 
 const navigation = {
   categories: [
@@ -136,10 +140,15 @@ function classNames(...classes) {
 export default function Navigation(){
 
 
+  const[openAuthModel, setOpenAuthModel]=useState(false);
   const [open, setOpen] = useState(false)
   const [openUserMenu, setOpenUserMenu] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null)
+  const jwt=localStorage.getItem("jwt")
+  const {auth}=useSelector(store=>store)
+  const dispatch=useDispatch();
   const navigate=useNavigate();
+  const location=useLocation();
 
 
   const handleUserClick = (event)=>{
@@ -150,11 +159,34 @@ export default function Navigation(){
   const closeMenu = () => {
     setOpenUserMenu(false);
   };
+  const handleOpen =() =>{
+    setOpenAuthModel(true);
+  };
+  const handleClose= ()=>{
+    setOpenAuthModel(false);
+
+  }
 
   const handleCategoryClick=(category,section,item,close)=>{
     navigate(`/${category.id}/${section.id}/${item.id}`);
     close()
    }
+   useEffect(()=>{
+    if(jwt)
+    {
+        dispatch(getUser(jwt))
+    }
+},[jwt,auth.jwt])
+
+useEffect(()=>{
+  if(auth.user){
+    handleClose();
+  }
+  if(location.pathname==="/login"|| location.pathname==="/register"){
+    navigate(-1);
+  }
+},[auth.user])
+
   return (
   
     <div className="bg-white">
@@ -439,7 +471,7 @@ export default function Navigation(){
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 
                 lg:items-center lg:justify-end">
-               {true?(  
+               {false?(  
                   <div>
                     <Avatar
                     className='text-white'
@@ -471,8 +503,10 @@ export default function Navigation(){
                     </Menu>
                   </div>
                ):(
-                <Button>
-                  Sign-out
+                <Button  onClick={handleOpen}
+                className='text-sm font-medium text-gray-700 hover:text-gray-800'
+                >
+                  Signin
                 </Button>
                )}
                 </div>
@@ -501,6 +535,7 @@ export default function Navigation(){
           </div>
         </nav>
       </header>
+      <AuthModel handleClose={handleClose} open={openAuthModel}/>
     </div>
   )
 }

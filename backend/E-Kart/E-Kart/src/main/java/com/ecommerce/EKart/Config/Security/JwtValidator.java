@@ -17,7 +17,7 @@ import java.io.IOException;
 @Component
 public class JwtValidator extends OncePerRequestFilter {
     @Autowired
-    JwtService jwtService;
+    JwtServiceImpl jwtService;
     @Autowired
     UserDetailsServiceImpl userDetailsServiceImpl;
 

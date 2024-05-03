@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,7 +69,7 @@ public class ProductServiceImpl implements ProductService{
         product.setSizes(req.getSizeSet());
         product.setQuantity(req.getQuantity());
         product.setCategory(thirdLevel);
-        product.setCreationDate(req.getCreateTime());
+        product.setCreationDate(LocalDateTime.now());
 
         Product saveProduct=productRepository.save(product);
         return saveProduct;
@@ -139,6 +140,10 @@ public class ProductServiceImpl implements ProductService{
         List<Product> pageContent=products.subList(startIndex,endIndex);
         Page<Product> filterProduct=new PageImpl<>(pageContent,pageable,products.size());
         return filterProduct;
+    }
+    public List<Product> findAllProduct(){
+        List<Product> productList=productRepository.findAll();
+        return productList;
     }
 
 }
