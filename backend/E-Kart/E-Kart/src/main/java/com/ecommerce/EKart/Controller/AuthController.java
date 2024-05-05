@@ -48,7 +48,7 @@ public class AuthController{
         AuthResponse response=new AuthResponse();
         if(user1!=null){
             response.setMsg("This email have a account!!");
-            response.setToken("Opps!! cant Possible");
+            response.setJwt("Opps!! cant Possible");
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
         User saveUser=userService.createNewUser(user);
@@ -58,7 +58,7 @@ public class AuthController{
 
         String token=jwtService.GenerateToken(email);
         userService.updateToken(token,email);
-        response.setToken(token);
+        response.setJwt(token);
         response.setMsg("Signup success!");
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -75,13 +75,13 @@ public class AuthController{
             authentication = authenticate(username,password);
         }catch (Exception e){
             response.setMsg("Wrong Password or Email");
-            response.setToken("error");
+            response.setJwt("error");
             return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token=jwtService.GenerateToken(username);
         userService.updateToken(token,username);
-        response.setToken(token);
+        response.setJwt(token);
         response.setMsg("Login Success");
         return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
     }

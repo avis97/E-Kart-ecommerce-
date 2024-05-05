@@ -2,8 +2,6 @@
 import { Routes,Route } from "react-router-dom";
 import CustomerRouter from "./Routers/CustomerRouter";
 
-
-
 function App() {
   return (
     <>

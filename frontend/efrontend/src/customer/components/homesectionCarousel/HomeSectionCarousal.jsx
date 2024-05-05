@@ -4,7 +4,7 @@ import HomeSectionCard from "../homesectionCard/HomeSectionCard";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { Button } from "@mui/material";
 import { ProductCardData } from "../product/ProductCardData";
-function HomeSectionCarousal({sectionName}) {
+function HomeSectionCarousal({ sectionName }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const responsive = {
     0: { items: 1 },
@@ -14,7 +14,9 @@ function HomeSectionCarousal({sectionName}) {
   const slidePrev = () => setActiveIndex(activeIndex - 1);
   const slideNext = () => setActiveIndex(activeIndex + 1);
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
-  const items = ProductCardData.map((item) => <HomeSectionCard product={item}/>);
+  const items = ProductCardData.map((item) => (
+    <HomeSectionCard product={item} />
+  ));
   return (
     <div className="relative px-4 lg:px-8">
       <div className="relative p-5">
@@ -51,7 +53,7 @@ function HomeSectionCarousal({sectionName}) {
         )}
       </div>
       <div className="absolute top-40 right-15 mt-4 mr-4 bg-slate-600">
-        {activeIndex!==0 &&
+        {activeIndex !== 0 && (
           <Button
             variant="contained"
             className="z-50"
@@ -69,7 +71,7 @@ function HomeSectionCarousal({sectionName}) {
               sx={{ transform: "rotate(90deg)", color: "black" }}
             />
           </Button>
-        }
+        )}
       </div>
     </div>
   );

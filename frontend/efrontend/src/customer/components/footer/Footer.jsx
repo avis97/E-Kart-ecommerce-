@@ -56,7 +56,7 @@ function Footer() {
           </div>
           <div>
             <Button className="pb-5" variant="h6" gutterBottom>
-             Commerce              
+              Commerce
             </Button>
           </div>
           <div>

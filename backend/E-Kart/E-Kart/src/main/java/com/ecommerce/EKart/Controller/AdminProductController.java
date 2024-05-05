@@ -33,7 +33,8 @@ public class AdminProductController{
         return new ResponseEntity<>(products,HttpStatus.OK);
     }
     @PutMapping("/{productId}/update")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product pro,@PathVariable int productId) throws ProductNotFoundException {
+    public ResponseEntity<Product> updateProduct(@RequestBody Product pro,
+                                                 @PathVariable int productId) throws ProductNotFoundException {
         Product product=productService.updateProduct(productId,pro);
         return new ResponseEntity<>(product,HttpStatus.OK);
     }

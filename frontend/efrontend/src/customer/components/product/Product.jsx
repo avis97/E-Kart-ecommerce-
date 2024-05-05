@@ -149,7 +149,7 @@ export default function Product() {
         <main className="mx-auto px-4 sm:px-6 lg:px-30 ">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-0.5">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 ">
-             Products
+              Products
             </h1>
 
             <div className="flex items-center">
@@ -352,7 +352,7 @@ export default function Product() {
               <div className="lg:col-span-4 w-full">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                   {ProductCardData.map((item) => (
-                    <ProductCard product={item}/>
+                    <ProductCard product={item} />
                   ))}
                 </div>
               </div>

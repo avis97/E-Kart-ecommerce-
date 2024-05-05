@@ -8,7 +8,8 @@ function SignInForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((store) => store);
+  const { auth } = useSelector(store => store);
+
   useEffect(() => {
     if (jwt) {
       dispatch(getUser(jwt));
@@ -23,8 +24,10 @@ function SignInForm() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    dispatch(register(userData));
+     dispatch(register(userData));
     console.log("userData", userData);
+   // Set formSubmitted to true after registration
+    navigate("/"); // Navigate to home page after registration
   };
 
   return (

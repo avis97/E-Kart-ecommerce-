@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
-import { Button, Grid, Rating,Box, LinearProgress } from "@mui/material";
+import { Button, Grid, Rating, Box, LinearProgress } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
 import { ProductCardData } from "../product/ProductCardData";
 import HomeSectionCard from "../homesectionCard/HomeSectionCard";
@@ -63,11 +63,11 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-  
-  const navigate=useNavigate();
-  const handleAddToCart=()=>{
-       navigate("/cart")
-  }
+
+  const navigate = useNavigate();
+  const handleAddToCart = () => {
+    navigate("/cart");
+  };
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -250,7 +250,8 @@ export default function ProductDetails() {
                   </RadioGroup>
                 </div>
 
-                <Button onClick={handleAddToCart}
+                <Button
+                  onClick={handleAddToCart}
                   variant="contained"
                   sx={{ px: "1rm", py: "1rem", mt: "1rem" }}
                 >
@@ -318,28 +319,61 @@ export default function ProductDetails() {
                 </div>
                 <Box className="mt-7">
                   <Grid container alignItems="center" gap={2}>
-                      <Grid item xs={2}>
-                        <p>Excellent</p>
-                      </Grid>
-                      <Grid item xs={7}>
-                        <LinearProgress sx={{bgcolor:"#d0d0d0", borderRadius:4,height:7 ,width:250 ,marginLeft:5}} variant="determinate" value={40} color="success"/>
-                      </Grid>
+                    <Grid item xs={2}>
+                      <p>Excellent</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{
+                          bgcolor: "#d0d0d0",
+                          borderRadius: 4,
+                          height: 7,
+                          width: 250,
+                          marginLeft: 5,
+                        }}
+                        variant="determinate"
+                        value={40}
+                        color="success"
+                      />
+                    </Grid>
                   </Grid>
                   <Grid container alignItems="center" gap={2}>
-                      <Grid item xs={2}>
-                        <p>Excellent</p>
-                      </Grid>
-                      <Grid item xs={7}>
-                        <LinearProgress sx={{bgcolor:"#d0d0d0", borderRadius:4,height:7 ,width:250 ,marginLeft:5}} variant="determinate" value={40} color="success"/>
-                      </Grid>
+                    <Grid item xs={2}>
+                      <p>Excellent</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{
+                          bgcolor: "#d0d0d0",
+                          borderRadius: 4,
+                          height: 7,
+                          width: 250,
+                          marginLeft: 5,
+                        }}
+                        variant="determinate"
+                        value={40}
+                        color="success"
+                      />
+                    </Grid>
                   </Grid>
                   <Grid container alignItems="center" gap={2}>
-                      <Grid item xs={2}>
-                        <p>Excellent</p>
-                      </Grid>
-                      <Grid item xs={7}>
-                        <LinearProgress sx={{bgcolor:"#d0d0d0", borderRadius:4,height:7 ,width:250 ,marginLeft:5}} variant="determinate" value={40} color="success"/>
-                      </Grid>
+                    <Grid item xs={2}>
+                      <p>Excellent</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{
+                          bgcolor: "#d0d0d0",
+                          borderRadius: 4,
+                          height: 7,
+                          width: 250,
+                          marginLeft: 5,
+                        }}
+                        variant="determinate"
+                        value={40}
+                        color="success"
+                      />
+                    </Grid>
                   </Grid>
                 </Box>
               </Grid>
@@ -348,10 +382,12 @@ export default function ProductDetails() {
         </section>
         {/* similar product */}
         <section className="pt-10">
-         <h1 className="py-5 text-xl font-bold">Similar Product</h1>
-         <div className="flex flex-wrap space-y-5">
-          {[1,1,1,1].map((item)=><HomeSectionCard/>)}
-         </div>
+          <h1 className="py-5 text-xl font-bold">Similar Product</h1>
+          <div className="flex flex-wrap space-y-5">
+            {[1, 1, 1, 1].map((item) => (
+              <HomeSectionCard />
+            ))}
+          </div>
         </section>
       </div>
     </div>

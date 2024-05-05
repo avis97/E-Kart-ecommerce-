@@ -2,14 +2,13 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 function OrderCard() {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
-    <div onClick={()=>navigate(`/account/order/${4}`)}className="p-5 shadow-lg hover:shadow-2xl border mb-4">
-      <Grid
-        container
-        spacing={2}
-        sx={{ justifyContent: "space-between" }}
-      >
+    <div
+      onClick={() => navigate(`/account/order/${4}`)}
+      className="p-5 shadow-lg hover:shadow-2xl border mb-4"
+    >
+      <Grid container spacing={2} sx={{ justifyContent: "space-between" }}>
         <Grid item xs={6}>
           <div className="flex cursor-pointer">
             <img
