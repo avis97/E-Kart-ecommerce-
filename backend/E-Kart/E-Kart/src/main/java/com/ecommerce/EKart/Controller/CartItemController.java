@@ -20,7 +20,8 @@ public class CartItemController{
     UserService userService;
 
     @DeleteMapping("/remove/{cartItemId}")
-    public ResponseEntity removeCartItem(@PathVariable int cartItemId, @RequestHeader("Authorization") String jwt) throws Exception {
+    public ResponseEntity removeCartItem(@PathVariable int cartItemId,
+                                         @RequestHeader("Authorization") String jwt) throws Exception {
         User user=userService.findUserByJwt(jwt.substring(7));
         cartItemService.removeCartItem(user.getId(),cartItemId );
         return new ResponseEntity("Item remove done from cart", HttpStatus.ACCEPTED);

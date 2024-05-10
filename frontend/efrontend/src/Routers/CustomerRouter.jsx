@@ -26,6 +26,7 @@ function CustomerRouter() {
             <Route path='/account/order' element={<Order/>}></Route>
             <Route path='/account/order/:orderId' element={<OrderDetails/>}></Route>
         </Routes>
+        
         <div>
         <Footer/>
         </div>

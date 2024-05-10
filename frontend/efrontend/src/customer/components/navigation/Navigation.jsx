@@ -105,8 +105,8 @@ const navigation = {
           name: "Clothing",
           items: [
             {
-              name: "Tops",
-              href: "http://localhost:3000/women/clothing/undefined#",
+              name: "Shirts",
+              href: "http://localhost:3000/men/clothing/shirt",
             },
             { name: "Pants", href: "#" },
             { name: "Sweaters", href: "#" },
@@ -142,8 +142,8 @@ const navigation = {
     },
   ],
   pages: [
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
+    // { name: "Company", href: "#" },
+    // { name: "Stores", href: "#" },
   ],
 };
 

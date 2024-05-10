@@ -11,10 +11,11 @@ function SignInForm() {
   const { auth } = useSelector(store => store);
 
   useEffect(() => {
-    if (jwt) {
+    if(jwt) {
       dispatch(getUser(jwt));
     }
-  }, [jwt, auth.jwt]);
+  }, [jwt,auth.jwt]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -24,7 +25,7 @@ function SignInForm() {
       email: data.get("email"),
       password: data.get("password"),
     };
-     dispatch(register(userData));
+    dispatch(register(userData));
     console.log("userData", userData);
    // Set formSubmitted to true after registration
     navigate("/"); // Navigate to home page after registration
