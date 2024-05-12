@@ -9,9 +9,9 @@ function HomePage() {
       <div>
         <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
         <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
+        {/* <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
         <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
-        <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
-        <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
+        <HomeSectionCarousal sectionName={"Mens Kurta's"}/> */}
       </div>
     </div>
   )

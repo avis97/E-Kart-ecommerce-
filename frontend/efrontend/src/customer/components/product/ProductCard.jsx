@@ -12,7 +12,7 @@ function ProductCard({ product }) {
       <div className="h-[20rem]">
         <img
           className="h-full w-full object-cover object-left-top "
-          src={product.image}
+          src={product.imgUrl}
           alt=""
         />
       </div>
@@ -22,9 +22,9 @@ function ProductCard({ product }) {
           <p>Casual shirt for blue</p>
         </div>
         <div className=""></div>
-        <p className="font-semibold">$199</p>
-        <p className="line-through opacity-50">$1999</p>
-        <p className="text-green-600 font-semibold">70% off</p>
+        <p className="font-semibold">${product.price}</p>
+        <p className="line-through opacity-50">${product.discountPrice}</p>
+        <p className="text-green-600 font-semibold">{product.discountPercent}%</p>
       </div>
     </div>
   );
