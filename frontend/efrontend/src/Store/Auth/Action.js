@@ -43,8 +43,8 @@ export const login = (userData) => async (dispatch) => {
     const res = await axios.post(`${API_BASE_URL}/auth/login`, userData);
     const user = res.data;
     console.log(user);
-    if (user.jwt){
-      localStorage.setItem("jwt",user.jwt);
+    if (user.jwt) {
+      localStorage.setItem("jwt", user.jwt);
     }
     dispatch(loginSuccess(user.jwt));
   } catch (error) {
@@ -58,9 +58,9 @@ const getUserFailure = (error) => ({ type: GET_USER_FAILURE, payload: error });
 
 export const getUser = (jwt) => async (dispatch) => {
   dispatch(getUserRequest());
-  console.log(jwt)
+  console.log(jwt);
   try {
-    const res = await axios.get(`${API_BASE_URL}/api/users/profile`,{
+    const res = await axios.get(`${API_BASE_URL}/api/users/profile`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
@@ -72,6 +72,8 @@ export const getUser = (jwt) => async (dispatch) => {
     dispatch(getUserFailure(error.massage));
   }
 };
+
+
 
 export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT, payload: null });
