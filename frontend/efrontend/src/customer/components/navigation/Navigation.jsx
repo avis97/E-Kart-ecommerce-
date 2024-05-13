@@ -199,6 +199,7 @@ export default function Navigation() {
   const handleLogout=()=>{
     dispatch(logout())
     setOpenUserMenu(false);
+    navigate("/")
   }
   return (
     <div className="bg-white">

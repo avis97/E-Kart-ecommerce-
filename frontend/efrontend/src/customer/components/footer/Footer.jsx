@@ -104,7 +104,18 @@ function Footer() {
               Terms
             </Button>
           </div>
+           
         </Grid>
+        <Grid>
+          <Grid style={{marginLeft:"500px"}}className="pt-20 items-center"> {/* Add class "items-center" to center its children */}
+            <Typography variant="body2" component="p" align="center">
+              &copy; 2023 My Company. All right reserved.
+            </Typography>
+            <Typography variant="body2" component="p" align="center">
+              Made with love by Me
+            </Typography>
+          </Grid>
+          </Grid>
       </Grid>
     </div>
   );

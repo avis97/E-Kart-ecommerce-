@@ -15,10 +15,10 @@ function HomeSectionCarousal({ sectionName }) {
   const slideNext = () => setActiveIndex(activeIndex + 1);
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
   const items = ProductCardData.map((item) => (
-    <HomeSectionCard product={item} />
+    <HomeSectionCard product={item.image} />
   ));
   return (
-    <div className="relative px-4 lg:px-8">
+    <div className="relative px-4 lg:px-8" style={{border:"1px solid black"}}>
       <div className="relative p-5">
         <h2 className="text-2xl font-bold text-gray-800 py-5">{sectionName}</h2>
         <AliceCarousel

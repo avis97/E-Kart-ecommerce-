@@ -7,8 +7,8 @@ function HomePage() {
     <div>
       <MainCarousel/>
       <div>
-        <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
-        <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
+        <HomeSectionCarousal sectionName={"Mens & Womans Collection"}/>
+        {/* <HomeSectionCarousal sectionName={"Mens Kurta's"}/> */}
         {/* <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
         <HomeSectionCarousal sectionName={"Mens Kurta's"}/>
         <HomeSectionCarousal sectionName={"Mens Kurta's"}/> */}

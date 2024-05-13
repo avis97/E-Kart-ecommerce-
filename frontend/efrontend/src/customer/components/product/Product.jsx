@@ -38,7 +38,7 @@ export default function Product() {
   const navigate = useNavigate();
   const param = useParams();
   const dispatch = useDispatch();
-  const { product } = useSelector((store) => store);
+  const { products } = useSelector((store) => store);
 
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
@@ -50,12 +50,7 @@ export default function Product() {
   const pageNumber = searchParams.get("page");
   const stock = searchParams.get("stock");
 
-  const handlePagination = (events,value) => {
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set("page", value);
-    const query = searchParams.toString();
-    navigate({ search: `?${query}` });
-  };
+  
   //pagination logic most important part in this project
   const handleFilter = (value, sectionId) => {
     const searchParams = new URLSearchParams(location.search);
@@ -86,10 +81,16 @@ export default function Product() {
     navigate({ search: `${query}` });
   };
 
-  useEffect(() => {
-    const [minPrice, maxPrice] =
-      priceValue === null ? [0, 10000] : priceValue.split("-").map(Number);
 
+  const handlePagination = (event, value) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page", value);
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+
+  useEffect(() => {
+    const [minPrice, maxPrice] = priceValue === null ? [0, 10000] : priceValue.split("-").map(Number);
     const data = {
       category: param.levelThree,
       color: colorValue || [],
@@ -98,8 +99,8 @@ export default function Product() {
       maxPrice,
       minDiscount: discount || 0,
       sort: sortValue || "price_low",
-      pageNumber: 0,
-      pageSize: 1,
+      pageNumber: 0, // Always fetches the first page
+      pageSize: 10, // Fetch only 1 product per page
       stock: stock,
     };
 
@@ -111,7 +112,6 @@ export default function Product() {
     priceValue,
     discount,
     sortValue,
-    pageNumber,
     stock,
   ]);
 
@@ -442,23 +442,23 @@ export default function Product() {
               {/* Product grid */}
               <div className="lg:col-span-4 w-full">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-                  {product.products &&
-                    product.products?.content?.map((item) => (
+                  {products.products &&
+                    products.products?.content?.map((item) => (
                       <ProductCard product={item} />
                     ))}
                 </div>
               </div>
             </div>
           </section>
-          <section className="w-full px=[3.6rem]">
-            <div className="px-4 py-5 flex justify-center">
-              <Pagination
-                count={product.products?.totalPages} // Default to 1 page if totalPages is not available
-                color="secondary"
-                onChange={handlePagination}
-              />
-            </div>
-          </section>
+          <section className="w-full px-[3.6rem]">
+          <div className="px-4 py-5 flex justify-center">
+            <Pagination
+              count={products.products?.totalPages || 1} // Default to 1 page if totalPages is not available
+              color="secondary"
+              onChange={handlePagination}
+            />
+          </div>
+        </section>
         </main>
       </div>
     </div>

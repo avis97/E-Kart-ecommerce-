@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { Button, Grid, Rating, Box, LinearProgress } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
 import { ProductCardData } from "../product/ProductCardData";
 import HomeSectionCard from "../homesectionCard/HomeSectionCard";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { findProductsById } from "../../../Store/Product/Action";
 const product = {
   name: "Basic Tee 6-Pack",
   price: "$192",
@@ -63,11 +65,18 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const param = useParams();
+  const { products } = useSelector((store) => store);
   const handleAddToCart = () => {
     navigate("/cart");
   };
+
+  useEffect(() => {
+    const data = { productId: param.productId };
+    dispatch(findProductsById(data));
+  }, [param.productId]);
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -114,7 +123,7 @@ export default function ProductDetails() {
           <div className="flex flex-col items-center">
             <div className="overflow-hidden rounded-1g max-w-[30rem] max-h-[35rem]">
               <img
-                src={product.images[0].src}
+                src={products.product?.imgUrl}
                 alt={product.images[0].alt}
                 className="h-full w-full object-cover object-center"
               />
@@ -142,9 +151,9 @@ export default function ProductDetails() {
                 className="text=lg lg:text-xl
               font-semibold text-gray-900 "
               >
-                puma
+                {products.product?.brand}
                 <h1 className="text-lg lg:text-xl text-gray-900 opacity-60 pt-1">
-                  Casual puff shirts and t-shirt
+                  {products.product?.title}
                 </h1>
               </h1>
             </div>
@@ -156,9 +165,15 @@ export default function ProductDetails() {
                 className="flex space-x-5 items-center
               text-lg lg:text-xl text-gray-900 mt-6"
               >
-                <p className="font-semibold">$199</p>
-                <p className="opacity-50 line-through">$211</p>
-                <p className="text-green-600 font-semibold">5% off</p>
+                <p className="font-semibold">
+                  ₹{products.product?.discountPrice}
+                </p>
+                <p className="opacity-50 line-through">
+                  ₹{products.product?.price}
+                </p>
+                <p className="text-green-600 font-semibold">
+                  {products.product?.discountPercent}%
+                </p>
               </div>
               {/* Reviews */}
               <div className="mt-6">
@@ -298,15 +313,15 @@ export default function ProductDetails() {
             </div>
           </div>
         </section>
-        <section>
-          <h1 className="font-semibold text-lg pb-4 ">
+        <section style={{marginTop:"-150px"}}>
+          <h1 className="font-semibold text-lg pb-4 " >
             Recent Review And Rating
           </h1>
           <div className="border p-5">
             <Grid container spacing={7}>
               <Grid item xs={7}>
                 <div className="space-y-5">
-                  {[1, 1, 1, 1].map((item) => (
+                  {[1, 1, 1].map((item) => (
                     <ProductReviewCard />
                   ))}
                 </div>
@@ -382,13 +397,15 @@ export default function ProductDetails() {
         </section>
         {/* similar product */}
         <section className="pt-10">
-          <h1 className="py-5 text-xl font-bold">Similar Product</h1>
-          <div className="flex flex-wrap space-y-5">
-            {[1, 1, 1, 1].map((item) => (
-              <HomeSectionCard />
-            ))}
-          </div>
-        </section>
+  <h1 className="py-5 text-xl font-bold">Similar Product</h1>
+  <div className="grid grid-cols-5 gap-5">
+    {ProductCardData.slice(0, 5).map((item, index) => (
+      <div key={index} className="w-full">
+        <HomeSectionCard product={item.image} />
+      </div>
+    ))}
+  </div>
+</section>
       </div>
     </div>
   );

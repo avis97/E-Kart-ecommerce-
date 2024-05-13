@@ -35,8 +35,9 @@ export const findProductsById = (reqData) => async (dispatch) => {
      } = reqData;
    try {
      const { data } = await api.get(
-       `/api/product/${productId}`
+       `/api/products/${productId}`
      );
+     console.log(data);
      dispatch({type:FIND_PRODUCT_BY_ID_SUCCESS,payload:data})
    } catch (error){
      dispatch({type:FIND_PRODUCT_BY_ID_FAILURE,payload:error.message})

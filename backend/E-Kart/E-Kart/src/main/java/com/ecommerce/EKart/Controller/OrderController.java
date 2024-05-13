@@ -28,7 +28,6 @@ public class OrderController{
         User user=userService.findUserByJwt(jwt.substring(7));
         System.out.println("hello");
         Order order=orderService.createOrder(user,shippingAddress);
-       // System.out.println(order);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
     @GetMapping("/user")
