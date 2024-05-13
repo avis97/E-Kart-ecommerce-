@@ -6,8 +6,7 @@ import { API_BASE_URL, api } from "../../config/Apiconfig";
 export const createOrder=(reqData)=> async (dispatch)=>{
     dispatch({type:CREATE_ORDER_REQUEST});
     try{
-        
-        const {data} = await api.post(`/api/order/`,reqData.address);
+        const {data} = await api.post(`/api/order/create`,reqData.address);
         if(data.id){
             reqData.navigate({search:`step=3&order_id=${data.id}`})
         }
@@ -26,7 +25,7 @@ export const createOrder=(reqData)=> async (dispatch)=>{
 export const getOrderById =(orderId)=> async(dispatch)=>{
      dispatch({type:GET_ORDER_BY_ID_REQUEST})
     try{
-        const {data} =await api.get(`/api/orders/${orderId}`);
+        const {data} =await api.get(`/api/order/${orderId}`);
         dispatch({
             type:GET_ORDER_BY_ID_SUCCESS,
             payload:data,

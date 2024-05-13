@@ -21,14 +21,18 @@ public class OrderController{
     OrderService orderService;
     @Autowired
     UserService userService;
-    @PostMapping("/")
-    public ResponseEntity createOrder(@RequestBody Address shippingAddress,
-                                             @RequestHeader("Authorization") String jwt) throws UserNotFoundException {
-        System.out.println("Hello");
-        User user=userService.findUserByJwt(jwt.substring(7));
-        System.out.println("hello");
-        Order order=orderService.createOrder(user,shippingAddress);
-        return new ResponseEntity<>(order, HttpStatus.CREATED);
+    @PostMapping("/create") // Use a more specific endpoint
+    public ResponseEntity<?> createOrder(@RequestBody Address shippingAddress,
+                                         @RequestHeader("Authorization") String jwt) {
+        try {
+            User user = userService.findUserByJwt(jwt.substring(7)); // Assuming JWT starts with "Bearer "
+            Order order = orderService.createOrder(user, shippingAddress);
+            return ResponseEntity.status(HttpStatus.CREATED).body(order);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
+        }
     }
     @GetMapping("/user")
     public ResponseEntity<List<Order>> userOrderHistory(@RequestHeader("Authorization") String jwt) throws UserNotFoundException {

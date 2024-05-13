@@ -1,5 +1,6 @@
 package com.ecommerce.EKart.Entitys;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class OrderItem {
     private LocalDateTime deliveryDate;
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Order order;
     @ManyToOne
     private Product product;

@@ -40,10 +40,10 @@ public class OrderServiceImpl implements OrderService{
         Address address=addressRepository.save(deliveryAddress);
         user.getAddressList().add(address);
         userRepository.save(user);
-
+        System.out.println("0k   1-------------");
         Cart cart=cartService.findCartByUserId(user.getId());
         List<OrderItem> orderItems=new ArrayList<>();
-
+        System.out.println("0k   2-------------");
         for(CartItem item: cart.getCartItemList()){
             OrderItem orderItem=new OrderItem();
             orderItem.setPrice(item.getPrice());
@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService{
             OrderItem createOrderItem=orderItemRepository.save(orderItem);
             orderItems.add(createOrderItem);
         }
-
+        System.out.println("0k   3-------------");
         Order createOrder=new Order();
         createOrder.setUser(user);
         createOrder.setOrderItemList(orderItems);
@@ -64,21 +64,23 @@ public class OrderServiceImpl implements OrderService{
         createOrder.setTotalDiscountPrice(cart.getTotalDiscountPrice());
         createOrder.setDiscount(cart.getDiscount());
         createOrder.setTotalItem(cart.getTotalItem());
-
+        System.out.println("0k   4-------------");
         createOrder.setAddress(address);
         createOrder.setOrderDateTime(LocalDateTime.now());
         createOrder.setOrderStatus("PENDING");
         createOrder.getPaymentDetails().setPaymentStatus("PENDING");
         createOrder.setCreatedAt(LocalDateTime.now());
-
+        System.out.println("0k   5-------------");
         Order saveOrder=orderRepository.save(createOrder);
 //        List<Order> orders=user.getOrderList();
 //        orders.add(saveOrder);
         userRepository.save(user);
+        System.out.println("0k   6-------------");
         for(OrderItem item:orderItems){
             item.setOrder(saveOrder);
             orderItemRepository.save(item);
         }
+        System.out.println("0k   7-------------");
         return saveOrder;
     }
 

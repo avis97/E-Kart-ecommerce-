@@ -33,7 +33,6 @@ public class Order{
     @OneToOne
     private Address address;
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<OrderItem> orderItemList=new ArrayList<>();
     @Embedded
     private PaymentDetails paymentDetails=new PaymentDetails();

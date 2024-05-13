@@ -32,16 +32,14 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
-    public CartItem updateCartItem(int userId, int id, CartItem cartItem) throws UserNotFoundException {
+    public CartItem updateCartItem(int cartId,int qu) throws Exception {
+        System.out.println("ok");
+        CartItem item=findCartItemById(cartId);
+        System.out.println("--???"+item.getId());
+            item.setQuantity(qu);
+            item.setPrice(item.getProduct().getPrice()*item.getQuantity());
+            item.setDiscountPrice(item.getProduct().getDiscountPrice()*item.getQuantity());
 
-        CartItem item=cartItemRepository.findById(id).get();
-        User user=userService.findUserById(item.getUserId());
-
-        if(user.getId()==userId){
-            cartItem.setQuantity(cartItem.getQuantity());
-            cartItem.setPrice(item.getProduct().getPrice()*item.getQuantity());
-            cartItem.setDiscountPrice(item.getProduct().getDiscountPrice()*item.getQuantity());
-        }
         return cartItemRepository.save(item);
     }
 

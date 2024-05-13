@@ -17,10 +17,11 @@ public class UserController{
     @GetMapping("/profile")
     public ResponseEntity<User> getUserByJwt(@RequestHeader("Authorization") String jwt)
             throws UserNotFoundException {
+        System.out.println("hello");
         String newJwt=jwt.substring(7);
-
+        System.out.println(newJwt);
         User user=userService.findUserByJwt(newJwt);
-        System.out.println(user+" "+newJwt);
+        System.out.println(user.getFirstName()+" "+newJwt);
         return new ResponseEntity<User>(user, HttpStatus.ACCEPTED);
     }
     @GetMapping("/profile/{userId}")

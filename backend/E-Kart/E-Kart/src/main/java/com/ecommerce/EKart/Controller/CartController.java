@@ -34,7 +34,6 @@ public class CartController{
         String JwtNew=jwt.substring(7);
         User user=userService.findUserByJwt(JwtNew);
         cartService.addCartItem(user.getId(),request);
-
         return new ResponseEntity("Item added to cart",HttpStatus.ACCEPTED);
 
     }
