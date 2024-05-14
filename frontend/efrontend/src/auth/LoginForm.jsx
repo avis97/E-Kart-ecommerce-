@@ -6,7 +6,7 @@ import { login } from "../Store/Auth/Action";
 
 function LoginForm() {
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -14,7 +14,7 @@ function LoginForm() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    dispatch(login(userData))
+    dispatch(login(userData));
     console.log("userData", userData);
   };
 
