@@ -20,7 +20,7 @@ function OrderSummary() {
   return (
     <div>
       <div className="p-5 shadow-lg rounded-s-md border mb-5">
-        <AddressCard />
+        <AddressCard address={order.order?.address}/>
       </div>
       <div>
         <div className="lg:grid grid-cols-3 lg:px-16 relative">
@@ -41,12 +41,12 @@ function OrderSummary() {
               <div className="space-y-3 font-semibold">
                 <div className="flex justify-between pt-3 text-black">
                   <span className="ml-3">Price</span>
-                  <span className="mr-3">757</span>
+                  <span className="mr-3">{order.order?.totalPrice}</span>
                 </div>
 
                 <div className="flex justify-between pt-3 text-black">
                   <span className="ml-3">Discounts</span>
-                  <span className="text-green-600 mr-3">₹1000</span>
+                  <span className="text-green-600 mr-3">{order.order?.discount}</span>
                 </div>
                 <div className="flex justify-between pt-3 text-black">
                   <span className="ml-3">Delivery Charge</span>
@@ -55,7 +55,7 @@ function OrderSummary() {
                 <hr />
                 <div className="flex justify-between pt-3 text-black">
                   <span className="ml-3">Total Amount</span>
-                  <span className="text-green-600 mr-3">₹1088</span>
+                  <span className="text-green-600 mr-3">{order.order?.totalDiscountPrice}</span>
                 </div>
               </div>
               <Button

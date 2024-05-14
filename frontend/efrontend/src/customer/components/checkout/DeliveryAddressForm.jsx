@@ -1,28 +1,29 @@
 import React from "react";
 import { Button, Grid, TextField, Box } from "@mui/material";
 import AddressCard from "../addressCard/AddressCard";
-import {useDispatch} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../../Store/Order/Action";
 import { useNavigate } from "react-router-dom";
 function DeliveryAddressForm() {
   const dispatch = useDispatch();
-    const navigate=useNavigate();
+  const navigate = useNavigate();
+  const { order } = useSelector((store) => store);
   const handleSubmit = (e) => {
-    
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    
     const address = {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
-      address: data.get("address"),
+      streetAddress: data.get("streetAddress"),
       city: data.get("city"),
       state: data.get("state"),
-      zip: data.get("zip"),
+      zipCode: data.get("zipCode"),
       number: data.get("number"),
     };
-    const orderData={address,navigate}
-    dispatch(createOrder(orderData))
-    console.log("Address", address);
+    const orderData = { address, navigate };
+    dispatch(createOrder(orderData));
+    console.log("Address", address.streetAddress);
   };
   return (
     <div>
@@ -34,7 +35,7 @@ function DeliveryAddressForm() {
         h-[30.5rem] overflow-y-scroll"
         >
           <div className="p-5 py-7 border-b curser-pointer">
-            <AddressCard />
+            <AddressCard address={order.order?.address} />
             <Button
               sx={{ mt: 2, bgcolor: "RGB(145 85 253)" }}
               size="large"
@@ -72,9 +73,9 @@ function DeliveryAddressForm() {
                 <Grid item xs={12}>
                   <TextField
                     required
-                    id="address"
-                    name="address"
-                    label="Address"
+                    id="streetAddress"
+                    name="streetAddress"
+                    label="streetAddress"
                     fullWidth
                     autoComplete="given-name"
                     multiline
@@ -104,8 +105,8 @@ function DeliveryAddressForm() {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    id="zip"
-                    name="zip"
+                    id="zipCode"
+                    name="zipCode"
                     label="Zip/Postal Code"
                     fullWidth
                     autoComplete="given-name"
