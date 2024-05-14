@@ -4,7 +4,25 @@ Developed Multiple Rest Full Apis with Entity like Product, Cart, Order, User. A
 Security. Collaborate with frontend by Axios, React-Router-Dom.
 This Project Helping me to develop Recat Knowledge with springboot,this project Is going on so try to implement some real world 
 feture in this appliaction. 
-
+### MAVEN SPRING DEPENDENCY
+* MySql Driver.
+* Soring JPA(hibernate)
+* Lombook
+* Spring web
+* Spring Security
+* Json Web Token
+### REACT DEPENDENCY
+* React-router-dom
+* Axios
+* Tailwind
+* React-Redux
+## PACKAGE
+* Models
+* Controller
+* Repositorys
+* Services
+* DTOs
+* Exception
 ## Some UI Project Demo Screenshot
 ![Screenshot (407)](https://github.com/avis97/E-Kart-ecommerce-FullStack-/assets/106426358/2193251e-ae5b-4357-b855-1590a1fbabcf)
 ## Login Box
