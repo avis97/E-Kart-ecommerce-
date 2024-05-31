@@ -1,8 +1,13 @@
 import React from "react";
+import {useNavigate} from "react-router-dom"
 
-function HomeSectionCard({ product }) {
+function HomeSectionCard({ product }){
+  const navigate=useNavigate();
+  const goProduct=()=>{
+    navigate("/men/clothing/shirt")
+  }
   return (
-    <div className="curser-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[13rem] mx-4 border border-black">
+    <div onClick={goProduct} className="curser-pointer flex flex-col items-center bg-white rounded-lg shadow-lg overflow-hidden w-[13rem] mx-4 border border-black">
       <div>
         <img
           className="object-cover object-top w-80 h-70"
